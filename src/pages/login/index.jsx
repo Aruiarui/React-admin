@@ -10,10 +10,17 @@ import './index.less'
 class Login extends Component {
   login = (e) => {
     e.preventDefault();
+    //
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log(values);
+      } else {
+        console.log(err);
+      }
+    })
   }
 
   validator = (rule, value, callback) => {
-
     const length = value && value.length;
     const pwdReg = /^[a-zA-Z0-9_]+$/;
 
@@ -24,7 +31,7 @@ class Login extends Component {
     }else if(length>10) {
       callback('密码必须小于10位')
     }else if(!pwdReg.test(value)) {
-      callback('用户名必须是由字母、数字、下划线组成')
+      callback('密码必须是由字母、数字、下划线组成')
     }else {
       callback();
     }
@@ -41,8 +48,9 @@ class Login extends Component {
         </header>
         <section className='login-content'>
           <h3>用户登录</h3>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+          <Form onSubmit={this.login} className="login-form">
             <Form.Item>
+              {/* getFieldDecorator（标识名称，配置对象）（组件） */}
               {getFieldDecorator('userName',{
                 rules:[
                   {required:true, message:'必须输入用户名', whitespace:true},
@@ -78,6 +86,7 @@ class Login extends Component {
 
       
     )
-  }
+  } 
 }
+// const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
 export default Login;

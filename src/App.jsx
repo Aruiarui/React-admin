@@ -18,3 +18,15 @@ export default class App extends Component {
     )
   }
 }
+
+
+//  输入imas
+// import {  } from "module";
+// 输入imprc
+// import React, { PureComponent } from 'react'
+// 输入ima
+// import { originalName as alias } from 'module'
+// 输入imp
+// import moduleName from 'module'
+// 输入imr
+// import React from 'react'
