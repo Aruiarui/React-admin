@@ -4,7 +4,7 @@ import { Form, Icon, Input, Button, message } from 'antd';
 import { reqLogin } from "../../api/index";
 import {setItem} from '../../utils/storage-utils';
 
-import logo from './logo.png'
+import logo from '../../assets/image/logo.png';
 import './index.less'
 
 @Form.create()
