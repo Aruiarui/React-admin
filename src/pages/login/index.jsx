@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
 import {
-  Form, Icon, Input, Button
+  Form, Icon, Input, Button, message
 } from 'antd';
 
 import logo from './logo.png'
 import './index.less'
+import { reqLogin } from "../../api/index";
 
 @Form.create()
 class Login extends Component {
   login = (e) => {
     e.preventDefault();
     //
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log(values);
+        //校验成功
+        const {username, password} = values
+        const result = await reqLogin(username, password);
+        // console.log(result)
+
+        if(result.status === 0) {
+          message.success('登录成功');
+          this.props.history.replace('/');
+
+        }else {
+          message.error(result.mag, 2)
+        }
+        // console.log(values);
       } else {
+        //校验失败
         console.log(err);
       }
     })
@@ -51,7 +65,7 @@ class Login extends Component {
           <Form onSubmit={this.login} className="login-form">
             <Form.Item>
               {/* getFieldDecorator（标识名称，配置对象）（组件） */}
-              {getFieldDecorator('userName',{
+              {getFieldDecorator('username',{
                 rules:[
                   {required:true, message:'必须输入用户名', whitespace:true},
                   {min:4, message:'用户名必须大于4位'},
@@ -62,7 +76,7 @@ class Login extends Component {
               )}
             </Form.Item>
             <Form.Item>
-            {getFieldDecorator('passWord',{
+            {getFieldDecorator('password',{
                 rules:[
                   {validator: this.validator}
                   // {required:true, message:'必须输入密码', whitespace:true},
