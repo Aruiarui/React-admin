@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Form, Icon, Input, Button, message
-} from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
+
+import { reqLogin } from "../../api/index";
+import {setItem} from '../../utils/storage-utils';
 
 import logo from './logo.png'
 import './index.less'
-import { reqLogin } from "../../api/index";
 
 @Form.create()
 class Login extends Component {
@@ -17,14 +17,16 @@ class Login extends Component {
         //校验成功
         const {username, password} = values
         const result = await reqLogin(username, password);
-        // console.log(result)
+        console.log(result)
 
         if(result.status === 0) {
           message.success('登录成功');
+          //保存数据
+          setItem(result.data);
+          //登录成功，跳转至admin页面
           this.props.history.replace('/');
-
         }else {
-          message.error(result.mag, 2)
+          message.error('网络出现问题，请重新加载', 2)
         }
         // console.log(values);
       } else {
