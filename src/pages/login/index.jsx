@@ -26,7 +26,7 @@ class Login extends Component {
           //登录成功，跳转至admin页面
           this.props.history.replace('/');
         }else {
-          message.error('网络出现问题，请重新加载', 2)
+          message.error(result.msg, 2)
         }
         // console.log(values);
       } else {
