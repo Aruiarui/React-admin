@@ -77,7 +77,7 @@ class LeftNav extends Component {
     this.setState({openKeys})
   }
   handleClick = () => {
-    console.log("111111111111111111111111")
+    // console.log("111111111111111111111111")
     this.setState({openKeys:[]})
   }
   render() {
@@ -86,7 +86,7 @@ class LeftNav extends Component {
     // const { pathname } = location;
     // 解构赋值内仍可以嵌套解构赋值
     const {location:{pathname}, opacity} = this.props;
-    console.log(this.state.openKeys);
+    // console.log(this.state.openKeys);
     return (
       <Fragment>
         <Link to="/home" className="logo" onClick={this.handleClick}>

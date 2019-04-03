@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import {Row, Col, message, Modal } from 'antd'
 import dayjs from 'dayjs';
 import { withRouter } from 'react-router-dom';
+
+
 import memory from '../../utils/memory-utils';
 import {removeItem} from '../../utils/storage-utils';
-
-
 import {reqWeather} from '../../api';
 import './index.less'
 import Buttons from '../buttons';
+import menuList from '../../config/index'
 
 @withRouter
 class HeaderMain extends Component {
@@ -54,8 +55,32 @@ class HeaderMain extends Component {
       .catch(err => message.error(err,2))
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     clearInterval(this.intervalId)
+  }
+
+
+
+  getTitle = () => {
+    // 获取path
+    const { pathname } = this.props.location;
+
+    for (let i = 0, length = menuList.length; i < length; i++) {
+      const menu = menuList[i];
+      const children = menu.children;
+      if (children) {
+        for (let j = 0, length = children.length; j < length; j++) {
+          let item = children[j];
+          if (item.key === pathname) {
+            return item.title;
+          }
+        }
+      } else {
+        if (pathname === menu.key) {
+          return menu.title;
+        }
+      }
+    }
   }
 
   
@@ -65,14 +90,16 @@ class HeaderMain extends Component {
 
   render() {
     const {sysTime, weatherImg, weather} = this.state;
+    const title = this.getTitle();
+    const username = memory.user.username;
     return (
       <div className="header-main">
         <Row className="header-main-top">
-          <span>欢迎 登录</span>
+          <span>欢迎 {username}</span>
           <Buttons onClick={this.exit}>退出</Buttons>
         </Row>
         <Row className="header-main-bottom">
-          <Col className="header-main-left" span={6}>主页</Col>
+          <Col className="header-main-left" span={6}>{title}</Col>
           <Col className="header-main-right" span={18}>
             <span>{sysTime}</span>
             <img src={weatherImg} alt="天气"/>
