@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { getItem } from '../../utils/storage-utils';
 import memory from '../../utils/memory-utils'
 import { Layout } from 'antd';
