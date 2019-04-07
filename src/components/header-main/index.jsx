@@ -15,13 +15,13 @@ import menuList from '../../config/index'
 class HeaderMain extends Component {
 
   state = {
-    sysTime: dayjs().format('YYYY-MM-DD  HH:mm:ss'),
-    weatherImg:'http://api.map.baidu.com/images/weather/day/qing.png',
-    weather:'晴'
+    sysTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+    weatherImg: 'http://api.map.baidu.com/images/weather/day/qing.png',
+    weather: '晴'
   }
 
   //确认退去按钮
-  exit = () => {
+  logout = () => {
     Modal.confirm({
       title: '确定退出登录吗',
       onOk: () => {
@@ -96,7 +96,7 @@ class HeaderMain extends Component {
       <div className="header-main">
         <Row className="header-main-top">
           <span>欢迎 {username}</span>
-          <Buttons onClick={this.exit}>退出</Buttons>
+          <Buttons onClick={this.logout}>退出</Buttons>
         </Row>
         <Row className="header-main-bottom">
           <Col className="header-main-left" span={6}>{title}</Col>
