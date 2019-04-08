@@ -7,12 +7,12 @@ import SaveUpdate from './save-update';
 export default class Products extends Component {
   render() {
     return (
-      <Switch>
-        <Route path="/product/index" conponent={Index}/>
-        <Route path="/product/detail" conponent={Detail}/>
-        <Route path="/product/save-update" conponent={SaveUpdate}/>
-        <Redirect to="/product/index"/>
-      </Switch>
+      // <Switch>
+      //   <Route path="/product/index" conponent={Index}/>
+      //   <Route path="/product/detail" conponent={Detail}/>
+      //   <Route path="/product/save-update" conponent={SaveUpdate}/>
+      //   <Redirect to="/product/index"/>
+      // </Switch>
     )
   }
 }

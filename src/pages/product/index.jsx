@@ -7,47 +7,12 @@ import {Link} from 'react-router-dom';
 const Option = Select.Option;
 export default class Product extends Component {
   state = {
-    product: [],
-    total: 0
+    product: [],  //单页产品的数组
+    total: 0  //产品总个数
   }
 
 //可复用
-  columns = [{
-    title: '商品名称',
-    dataIndex: 'name',
-  }, {
-    title: '商品描述',
-    className: 'column-money',
-    dataIndex: 'money',
-  }, {
-    title: '价格',
-    dataIndex: 'address',
-  }, {
-    title: '状态',
-    className: 'column-money',
-    key: 'zt',
-    render: () => {
-      return(
-        <Fragment>
-          <Button type="primary">上架</Button>&nbsp;&nbsp;&nbsp;
-          <span>已下架</span> 
-        </Fragment>
-      )
-    }
-  }, 
-  {
-    title: '操作',
-    className: 'column-money',
-    key: 'cz',
-    render: () => {
-      return(
-        <Fragment>
-          <Buttons>详情</Buttons>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Buttons>修改</Buttons>
-        </Fragment>
-      )
-    }
-  }];
+  
 
   getProducts = async (pageNum, PageSize = 3) => {
     const result = await reqGetProducts(pageNum, PageSize);
@@ -67,6 +32,59 @@ export default class Product extends Component {
 
   render() {
     const {products, total} = this.state;
+    const columns = [{
+      title: '商品名称',
+      dataIndex: 'name',
+      key: 'name',
+    }, {
+      title: '商品描述',
+      dataIndex: 'desc',
+      key: 'desc',
+  
+    }, {
+      title: '价格',
+      dataIndex: 'price',
+      key: 'price',
+  
+    }, {
+      title: '状态',
+      key: 'status',
+      render: () => {
+        return(
+          <Fragment>
+            <Button type="primary">上架</Button>&nbsp;&nbsp;&nbsp;
+            <span>已下架</span> 
+          </Fragment>
+        )
+      }
+    }, 
+    {
+      title: '操作',
+      key: 'operator',
+      render: () => {
+        return(
+          <Fragment>
+            <Buttons>详情</Buttons>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <Buttons>修改</Buttons>
+          </Fragment>
+        )
+      }
+    }];
+    
+    
+    // const columns = [{
+    //   title: '姓名',
+    //   dataIndex: 'name',
+    //   key: 'name',
+    // }, {
+    //   title: '年龄',
+    //   dataIndex: 'age',
+    //   key: 'age',
+    // }, {
+    //   title: '住址',
+    //   dataIndex: 'address',
+    //   key: 'address',
+    // }];
     return (
       <Card
         title={
@@ -83,19 +101,20 @@ export default class Product extends Component {
         style={{ width: '100%' }}
       >
         <Table
-          columns={this.columns}
+          columns={columns}
           dataSource={products}
           bordered
           pagination={{
-            defaultPageSize: 5,
-            pageSizeOptions: ['5', '10', '15', '20'],
+            defaultPageSize: 3,
+            pageSizeOptions: ['3', '6', '9'],
             showQuickJumper: true,
             showSizeChanger: true,
             total,
-            onChange: this.getProducts,
-            onShowSizeChange: this.getProducts
+            onChange: this.getProducts, //分页器中的方法，当页码发生改变啥的回调
+            onShowSizeChange: this.getProducts  //pageSize变化的回调
           }}
           rowKey="_id"
+          loading={false}
         />
       </Card>
     )
