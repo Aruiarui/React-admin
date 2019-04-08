@@ -50,3 +50,4 @@ export const reqAddCategory = (parentId, categoryName) => ajax(prefix + '/manage
 
 //请求修改分类名称
 export const reqUpdateCategoryName = (categoryId, categoryName) => ajax(prefix + '/manage/category/update', {categoryId, categoryName}, 'POST'); 
+export const reqGetProducts = (pageName, pageSize) => ajax(prefix + '/manage/product/list', {pageName, pageSize}); 

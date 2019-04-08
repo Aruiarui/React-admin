@@ -6,9 +6,8 @@ const Option = Select.Option;
 
 @Form.create()
 class AddCategoryForm extends Component {
-
   static propTypes = {
-    categoies: PropTypes.array.isRequired
+    categories: PropTypes.array.isRequired
   }
 
   validator = (rule, value, callback) => {
@@ -26,7 +25,8 @@ class AddCategoryForm extends Component {
   }
 
   render() {
-    const { form : {getFieldDecorator},categories} = this.props;
+    
+    const { form : { getFieldDecorator }, categories } = this.props;
     return (
       <Form>
       <Item label="所属分类">
@@ -38,7 +38,7 @@ class AddCategoryForm extends Component {
             <Select >
               <Option value="0" key="0">一级分类</Option>
               {
-                categories.map((category) => <Option value={category._id} key={category._id}>{category.name}</Option>)
+                categories.map((category) => <Option key={category._id} value={category._id}>{category.name}</Option>)
               }
             </Select>
           )}
