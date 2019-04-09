@@ -5,14 +5,14 @@ import memory from '../../utils/memory-utils'
 import { Layout } from 'antd';
 
 import './index.less';
-
+ 
 
 import HeaderMain from '../../components/header-main';
 import LeftNav from '../../components/left-nav';
 
 import Home from '../home';
 import Category from '../category';
-import Product from '../product';
+import Product from '../product/index';
 import User from '../user';
 import Role from '../role';
 import Bar from '../charts/bar';

@@ -54,3 +54,10 @@ export const reqUpdateCategoryName = (categoryId, categoryName) => ajax(prefix +
 
 //产品数据函数
 export const reqGetProducts = (pageNum, pageSize) => ajax(prefix + '/manage/product/list', {pageNum, pageSize}); 
+
+//添加分类列表
+export const reqAddProduct = (product) => ajax(prefix + '/manage/product/add', product, 'POST')
+
+
+//修改分类列表
+export const reqUpdateProduct = (product) => ajax(prefix + '/manage/product/add', product, 'POST')
